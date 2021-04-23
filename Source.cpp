@@ -9,7 +9,7 @@ void main()
 {
 	// Reading in numbers to work with
 	ifstream readFile;
-	readFile.open("input-a3q2.txt");
+	readFile.open("input-a3q2.txt"); 
 
 	int numberOfHeapNumbers;
 	int numbersToHeap;
