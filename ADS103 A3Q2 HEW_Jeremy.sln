@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ADS103 A3Q2 HEW_Jeremy", "ADS103 A3Q2 HEW_Jeremy.vcxproj", "{5E5900F1-2FA6-4E7E-A055-13BFF8F59C74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E5900F1-2FA6-4E7E-A055-13BFF8F59C74}.Debug|x64.ActiveCfg = Debug|x64
+		{5E5900F1-2FA6-4E7E-A055-13BFF8F59C74}.Debug|x64.Build.0 = Debug|x64
+		{5E5900F1-2FA6-4E7E-A055-13BFF8F59C74}.Debug|x86.ActiveCfg = Debug|Win32
+		{5E5900F1-2FA6-4E7E-A055-13BFF8F59C74}.Debug|x86.Build.0 = Debug|Win32
+		{5E5900F1-2FA6-4E7E-A055-13BFF8F59C74}.Release|x64.ActiveCfg = Release|x64
+		{5E5900F1-2FA6-4E7E-A055-13BFF8F59C74}.Release|x64.Build.0 = Release|x64
+		{5E5900F1-2FA6-4E7E-A055-13BFF8F59C74}.Release|x86.ActiveCfg = Release|Win32
+		{5E5900F1-2FA6-4E7E-A055-13BFF8F59C74}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2872AF01-531C-43CA-BDA1-79CF42A3DEBC}
+	EndGlobalSection
+EndGlobal
