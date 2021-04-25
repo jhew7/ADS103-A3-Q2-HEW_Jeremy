@@ -140,12 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BinaryMaxHeap.cpp" />
-    <ClCompile Include="NumbersToBeHeaped.cpp" />
+    <ClCompile Include="HeapedNums.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BinaryMaxHeap.h" />
-    <ClInclude Include="NumbersToBeHeaped.h" />
+    <ClInclude Include="HeapedNums.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

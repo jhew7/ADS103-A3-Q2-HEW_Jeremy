@@ -3,14 +3,30 @@
 #include <cstdlib>
 #include <vector>
 #include <iterator>
-#include "NumbersToBeHeaped.h"
+#include <queue>		// For Breadth Traversal
+#include "HeapedNums.h"
 
 using namespace std;
+
+//HELPER CLASS
+class HeapedNumsLevelNode
+{
+public:
+	HeapedNums *number;
+	int level;
+
+	HeapedNumsLevelNode(HeapedNums* number, int level)
+	{
+		this->number = number;
+		this->level = level;
+	}
+};
 
 class BinaryMaxHeap
 {
 public:
-	vector<NumbersToBeHeaped> heap;		// vector is an array that can shrink and grow
+	HeapedNums* root = NULL;
+	vector<HeapedNums> heap;		
 	int leftChildIndex(int parent);
 	int rightChildIndex(int parent);
 	int parentIndex(int child);
@@ -18,10 +34,12 @@ public:
 	void heapifyUp(int index);
 	void heapifyDown(int index);
 	
-	void Insert(NumbersToBeHeaped element);
+	void Insert(HeapedNums element);
 	void DeleteMin();
-	NumbersToBeHeaped* ExtractMin();
+	HeapedNums* ExtractMin();
 	void showHeap();
+	void showHeapAndWrite();
+	//void showAndWriteTravHeap(HeapedNums* p);
 	int Size();
 };
 

@@ -1,4 +1,5 @@
 #include "BinaryMaxHeap.h"
+#include <fstream> // File Reading/Writing
 
 // Returns Left Child Node - " Arr[(2 * parent)+1]
 int BinaryMaxHeap::leftChildIndex(int parent)
@@ -33,65 +34,48 @@ int BinaryMaxHeap::parentIndex(int child)
         return parent;
 }
 
-// AFTER INSERTING - we heapifyup from where that new inserted player ended up
-// compares current node with parent and swaps the smaller to the top
-// this is a recursive function, so it will call itself (heapifyup) on the next higher level where we swapped the value
+// AFTER INSERTING
 void BinaryMaxHeap::heapifyUp(int index)
 {
-    // IF index is not the root (top of the tree or NULL)
-    // AND parent index within heap bounds is not negative ( >= 0 )
-    // AND current nodes rank is less than parent nodes rank
-    if (index >= 0 && parentIndex(index) >= 0 && heap[index].rank > heap[parentIndex(index)].rank)
+    if (index >= 0 && parentIndex(index) >= 0 && heap[index].inputHeapNum > heap[parentIndex(index)].inputHeapNum)
     {
-        // IF SO, swap values between current node and parent
-        NumbersToBeHeaped temp = heap[index];
+        HeapedNums temp = heap[index];
         heap[index] = heap[parentIndex(index)];
         heap[parentIndex(index)] = temp;
-        // since we swapped, now we can run heapifyup again recursively on the parent from here
+
         heapifyUp(parentIndex(index));
-        // as soon as we call heapifyUp and there is no value then the loop will stop
     }
 }
 
-// DOWN is less efficient to UP
-// we have to compare both children first before moving down
-// usually called when destroyed root of tree
-// also recursive, keeps calling itself as it swaps down the tree
 void BinaryMaxHeap::heapifyDown(int index)
 {
-    // get left and right child indexes (index position in the array)
     int childL = leftChildIndex(index);
     int childR = rightChildIndex(index);
-    // child variable representing the path we'll compare down
+
     int childIndex = childL;
     
-    // IF childL is not -1
-    // AND childR is not -1
-    // AND childR.rank is less than childL.rank 
-    if (childL >= 0 && childR >= 0 && heap[childR].rank > heap[childL].rank)
+    if (childL >= 0 && childR >= 0 && heap[childR].inputHeapNum > heap[childL].inputHeapNum)
     {
-        // make right child index the focus of left
         childIndex = childR;
     }
 
     // IF childIndex is not the root node (0) and not -1
     // AND current node is bigger than child node
-    if (childIndex > 0 && heap[index].rank < heap[childIndex].rank)
+    if (childIndex > 0 && heap[index].inputHeapNum < heap[childIndex].inputHeapNum)
     {
-        // then we swap current with child so we have smaller nodes to the top
-        NumbersToBeHeaped temp = heap[index];
+        HeapedNums temp = heap[index];
         heap[index] = heap[childIndex];
         heap[childIndex] = temp;
-        // recurse further down - keep calling until bottom of tree
+
         heapifyDown(childIndex);
     }
 }
 
 // INSERTS always at the lowest next free node of the tree (keeps things balanced)
-void BinaryMaxHeap::Insert(NumbersToBeHeaped element)
+void BinaryMaxHeap::Insert(HeapedNums element)
 {
     heap.push_back(element);
-    heapifyUp(heap.size() - 1);     // starts at the bottom (size of the array - 1)
+    heapifyUp(heap.size() - 1);     
 }
 
 void BinaryMaxHeap::DeleteMin()
@@ -102,8 +86,7 @@ void BinaryMaxHeap::DeleteMin()
         cout << "Heap Empty." << endl;
         return;
     }
-    // COPY value in LAST element into ROOT
-    heap[0] = heap[heap.size() - 1];    // OR - heap.at(heap.size()-1)
+    heap[0] = heap[heap.size() - 1];    
     // DELETE last element
     heap.pop_back();
     // then heapifyDown starting from ROOT (index 0)
@@ -112,7 +95,7 @@ void BinaryMaxHeap::DeleteMin()
 }
 
 // get the ROOT player node from heap tree structure (the first element in the vector)
-NumbersToBeHeaped* BinaryMaxHeap::ExtractMin()
+HeapedNums* BinaryMaxHeap::ExtractMin()
 {
     // IF it's empty return nothing
     if (heap.size() == 0)
@@ -121,23 +104,98 @@ NumbersToBeHeaped* BinaryMaxHeap::ExtractMin()
     }
     else
     {
-        NumbersToBeHeaped* p = &(heap.front());
+        HeapedNums* p = &(heap.front());
         return p;
-        // OR
-        // return &(heap.front());     // & for getting the memory address of (heap.front())
     }
 }
 
+// Shows in consol
 void BinaryMaxHeap::showHeap()
 {
-    cout << "Heap: " << endl;
-    for (NumbersToBeHeaped p : heap)       // for each (:) player in the heap
+    cout << "Max Heap: " << endl;
+    for (HeapedNums p : heap)       
     {
-        cout << p.rank << " ";
+        cout << p.inputHeapNum << " ";
     }
 }
 
-// size of the array (heap)
+// Prints to text file
+void BinaryMaxHeap::showHeapAndWrite()
+{
+    ofstream  writeFile;
+    writeFile.open("output-a3q2.txt");
+    writeFile << "Max Heap: " << endl;
+    for (HeapedNums p : heap)       
+    {
+       writeFile << p.inputHeapNum << " ";
+    }
+        
+    writeFile.close();
+}
+
+// NOTE: Kept this in here to show I tried to create the breadth traversed heap but coudln't get it to work
+// Shows & Writes Traversed Heap
+//void BinaryMaxHeap::showAndWriteTravHeap(HeapedNums* p)
+//{
+//    
+//    // Create an empty queue for level order traversal
+//    queue <HeapedNumsLevelNode> q;
+//
+//    // Enqueue Root and initialise height
+//    q.push(HeapedNumsLevelNode(root, 0));
+//
+//    int previousOutputLevel = -1;
+//
+//    while (q.empty() == false)
+//    {
+//        // Opening file to get the amount of numbers so I can loop with them
+//        ifstream readFile;
+//        readFile.open("input-a3q2.txt");
+//        int numberOfHeapNums;
+//        int numbersToHeap;
+//        readFile >> numberOfHeapNums;
+//
+//        // Write the results of avl1.show to txt file
+//        ofstream  writeFile;
+//        writeFile.open("output-a3q2.txt");
+//
+//        writeFile << "Heap Traversal: has now been writen to file." << endl;
+//
+//        // Loop through all numbers so they all print
+//        for (HeapedNums p : heap)
+//        {
+//            for (int i = 0; i < numberOfHeapNums; i++)
+//            {
+//                // Print front of queue and remove it from queue
+//                HeapedNumsLevelNode node = q.front();
+//                while (node.level != previousOutputLevel)
+//                {
+//                    writeFile << endl;
+//                    writeFile << node.level << " : ";
+//                    previousOutputLevel = node.level;
+//
+//                }
+//
+//                writeFile << p.inputHeapNum << " ";
+//                q.pop();
+//                // Enqueue the LEFT Child
+//                if (node.number->leftChild != NULL)
+//                {
+//                    q.push(HeapedNumsLevelNode(node.number->leftChild, node.level + 1));
+//                }
+//
+//                // Enqueue the RIGHT Child
+//                if (node.number->rightChild != NULL)
+//                {
+//                    q.push(HeapedNumsLevelNode(node.number->rightChild, node.level + 1));
+//                }
+//            }
+//        }
+//        writeFile.close();
+//    }
+//}
+
+// HEAP SIZE
 int BinaryMaxHeap::Size()
 {
     return heap.size();   

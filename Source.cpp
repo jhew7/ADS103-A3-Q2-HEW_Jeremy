@@ -22,24 +22,27 @@ void main()
 	{
 		int temp;
 		readFile >> temp;
-		heapedNumbers.Insert(NumbersToBeHeaped(temp));
+		heapedNumbers.Insert(HeapedNums(temp));
 	}
 
 	readFile.close();
 
-		
+	// Showing in consol first	
 	heapedNumbers.showHeap();
 	
 	// Show Top of the Heap to Consol for checking
-	NumbersToBeHeaped* topHeapedNumber = heapedNumbers.ExtractMin();
+	HeapedNums* topHeapedNumber = heapedNumbers.ExtractMin();
 	
 	if (topHeapedNumber != NULL)
 	{
-		cout << "\n\nTop of the Heap: " << topHeapedNumber->rank << " " << endl;
+		cout << "\n\nTop of Max Heap: " << topHeapedNumber->inputHeapNum << " " << endl;
 	}
 	else
 		cout << "Heap must be empty!!" << endl;
 
+	// Writing to text file
+	heapedNumbers.showHeapAndWrite();
+	//heapedNumbers.showAndWriteTravHeap(heapedNumbers.root);
 
 	system("pause");
 }

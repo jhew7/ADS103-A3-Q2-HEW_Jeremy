@@ -18,7 +18,7 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NumbersToBeHeaped.cpp">
+    <ClCompile Include="HeapedNums.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BinaryMaxHeap.cpp">
@@ -26,7 +26,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NumbersToBeHeaped.h">
+    <ClInclude Include="HeapedNums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BinaryMaxHeap.h">
